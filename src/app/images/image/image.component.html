@@ -1,0 +1,45 @@
+<div class="card" style="width: 25rem;">
+    <div class="card-body">
+        <form [formGroup]="formTemplate" (submit)="onSubmit(formTemplate)">
+            <div class="text-center">
+                <img [src]="imgSrc" width="350px" height="250px" (click)="fileUploader.click()">               
+            </div>
+            
+            <div class="form-group">
+                <label for="">Select file to upload</label>
+                <input type="file" accept="image/png,image/jpg" class="form-control" formControlName="imageUrl" (change)="showPreview($event)" #fileUploader>
+                <div class="text-danger" *ngIf="isSubmitted && formControls.imageUrl.errors?.required">Ce champ est obligatoire</div>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Titre" formControlName="caption">
+                <div class="text-danger" *ngIf="isSubmitted && formControls.caption.errors?.required">Ce champ est obligatoire</div>
+            </div>
+            <div class="form-group">
+                
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-6">
+                        <select formControlName="category" class="form-control">
+                            <option value="Appartement" selected>Appartement</option>
+                            <option value="Laptop">Laptop</option>
+                            <option value="Desktop">Desktop</option>
+                            <option value="Vehicule">Vehicule</option>
+                        </select>                        
+                    </div>
+                    <div class="col-6">
+                        <input type="text" class="form-control" placeholder="Prix du bien" formControlName="prix">
+                        <div class="text-danger" *ngIf="isSubmitted && formControls.prix.errors?.required">Ce champ est obligatoire</div>
+                    </div>
+                </div>                
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" placeholder="Faites la description du bien" formControlName="description" rows="3" cols="30"></textarea>
+                <div class="text-danger" *ngIf="isSubmitted && formControls.description.errors?.required">Ce champ est obligatoire</div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success float-right"><i class="fa fa-save"></i> Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
