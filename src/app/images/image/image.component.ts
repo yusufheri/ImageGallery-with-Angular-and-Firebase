@@ -4,6 +4,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import { ImageService } from 'src/app/services/image.service';
 import { Property } from 'src/app/models/property.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-image',
@@ -15,6 +16,8 @@ export class ImageComponent implements OnInit {
   imgSrc = '';
   selectedImage: any = null;
   isSubmitted = false;
+  pourcentage: number = null;
+  showProgres = false;
 
   formTemplate = new FormGroup({
       caption: new FormControl('', [Validators.required]),
@@ -52,18 +55,31 @@ export class ImageComponent implements OnInit {
     this.isSubmitted = true;
     if (this.formTemplate.valid) {
       const folder = formValue.value['category'];
+      this.showProgres = true;
 
       const filePath = `${folder}/${this.selectedImage.name.split('.').splice(0, 1).join('.')}_${new Date().getTime()}`;
       const fileRef = this.storage.ref(filePath);
-      this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
+      const uploadTask = this.storage.upload(filePath, this.selectedImage);
+
+      uploadTask.snapshotChanges().pipe(
           finalize(() => {
             fileRef.getDownloadURL().subscribe((url) => {
-              this.imageService.insertPropertyDetail(new Property(formValue.value['caption'],
-              formValue.value['category'], url, formValue.value['description'], formValue.value['prix']));
+              // tslint:disable-next-line: max-line-length
+              this.imageService.insertPropertyDetail(new Property(formValue.value['caption'], formValue.value['category'], url, formValue.value['description'], formValue.value['prix']));
               this.resetForm();
             });
           })
         ).subscribe();
+
+      uploadTask.percentageChanges().subscribe(
+        pourcentage => {
+          if (Math.round(pourcentage) === 100) {this.showProgres = false ; }
+        },
+        error => {
+          console.log(error);
+          this.showProgres = false ;
+        }
+      );
     }
   }
 

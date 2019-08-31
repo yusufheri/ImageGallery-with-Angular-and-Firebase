@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ImageService } from 'src/app/services/image.service';
 
 @Component({
   selector: 'app-image-list',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ImageListComponent implements OnInit {
 
-  constructor() { }
+  imageList: any[];
+  rowIndexArray: any[];
+
+  constructor(private imageService: ImageService) { }
 
   ngOnInit() {
+    this.imageService.propertyDetailList.snapshotChanges().subscribe(
+      list => {
+        this.imageList = list.map(item => item.payload.val());
+        this.rowIndexArray = Array.from(Array(Math.ceil((this.imageList.length + 1) / 3)).keys());
+      }
+    );
   }
 
 }

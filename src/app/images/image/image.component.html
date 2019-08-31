@@ -15,9 +15,6 @@
                 <div class="text-danger" *ngIf="isSubmitted && formControls.caption.errors?.required">Ce champ est obligatoire</div>
             </div>
             <div class="form-group">
-                
-            </div>
-            <div class="form-group">
                 <div class="row">
                     <div class="col-6">
                         <select formControlName="category" class="form-control">
@@ -37,8 +34,16 @@
                 <textarea class="form-control" placeholder="Faites la description du bien" formControlName="description" rows="3" cols="30"></textarea>
                 <div class="text-danger" *ngIf="isSubmitted && formControls.description.errors?.required">Ce champ est obligatoire</div>
             </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-success float-right"><i class="fa fa-save"></i> Submit</button>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <a routerLink="/image/list" class="btn btn-primary btn-block float-right"><i class="fa fa-home"></i> Go to Gallery</a>
+                </div>
+                <div class="form-group col-md-6">
+                   <button type="submit" class="btn btn-success btn-block float-right"><i class="fa fa-save"></i> Submit</button>
+                </div>
+            </div>
+            <div class="form-row"  *ngIf="showProgres">
+                <i class="fa fa-spin fa-spin-2x fa-4x fa-circle-o-notch fa-fw text-danger float-right"></i>
             </div>
         </form>
     </div>
