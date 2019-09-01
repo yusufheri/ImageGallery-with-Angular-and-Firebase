@@ -1,1 +1,36 @@
-<p>header works!</p>
+<nav class="navbar navbar-default fixed-top navbar-expand-lg navbar-light">
+    <div class="navbar-header d-flex col">
+        <a class="navbar-brand" routerLink="/">Image<b>Gallery</b></a>  		
+        <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle navbar-toggler ml-auto">
+            <span class="navbar-toggler-icon"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+    </div>
+    
+    <!-- Collection of nav links, forms, and other content for toggling -->
+    <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+        <!--  
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item"><a routerLink="/" class="nav-link">Home</a></li>		
+                
+            </ul>
+           <form [formGroup]="formSearch" class="navbar-form form-inline">
+                <div class="input-group search-box">								
+                    <input type="text" id="search" class="form-control" placeholder="Search here...">
+                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                </div>
+            </form> -->
+            <ul class="nav navbar-nav navbar-right ml-auto">			
+                <li class="nav-item">
+                    <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Login</a>
+                    <ul class="dropdown-menu form-wrapper">	<li><app-signin></app-signin></li></ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" data-toggle="dropdown" class="btn btn-primary dropdown-toggle get-started-btn mt-1 mb-1">Sign up</a>
+                    <ul class="dropdown-menu form-wrapper"><li><app-signup></app-signup></li></ul>
+                </li>
+            </ul>
+        </div>
+</nav>

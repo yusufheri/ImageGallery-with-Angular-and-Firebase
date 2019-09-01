@@ -17,6 +17,8 @@ import { HeaderComponent } from './components/header/header.component';
 
 // Firebase config
 import { environment } from '../environments/environment';
+import { SigninComponent } from './components/signin/signin.component';
+import { SignupComponent } from './components/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { environment } from '../environments/environment';
     ImageComponent,
     ImageListComponent,
     NotFoundComponent,
-    HeaderComponent
+    HeaderComponent,
+    SigninComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
