@@ -22,7 +22,7 @@
                     <span class="input-group-addon"><i class="fa fa-search"></i></span>
                 </div>
             </form> -->
-            <ul class="nav navbar-nav navbar-right ml-auto">			
+            <ul class="nav navbar-nav navbar-right ml-auto" *ngIf="!(auth.userData|async)">			
                 <li class="nav-item">
                     <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Login</a>
                     <ul class="dropdown-menu form-wrapper">	<li><app-signin></app-signin></li></ul>
@@ -30,6 +30,15 @@
                 <li class="nav-item">
                     <a href="#" data-toggle="dropdown" class="btn btn-primary dropdown-toggle get-started-btn mt-1 mb-1">Sign up</a>
                     <ul class="dropdown-menu form-wrapper"><li><app-signup></app-signup></li></ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right ml-auto" *ngIf="auth.userData|async">
+                <li class="nav-item dropdown">
+                    <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Administration <b class="caret"></b></a>
+                    <ul class="dropdown-menu">					
+                        <li><a routerLink="/image/list" class="dropdown-item">Mes photos</a></li>
+                        <li><button (click)="signOut()" class="dropdown-item btn btn-important">Logout</button></li>
+                    </ul>
                 </li>
             </ul>
         </div>
