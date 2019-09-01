@@ -13,6 +13,7 @@ import { User } from '../models/user.model';
 export class AuthService {
   // userData: Observable<firebase.User>;
   userData: any; // save logged in user data
+  defaultURL = '/assets/img/image.png';
 
   constructor(
     private angularFireAuth: AngularFireAuth,
@@ -62,17 +63,8 @@ export class AuthService {
     }).catch((error) => {
       window.alert(error.message);
     });
-    /* this.angularFireAuth
-      .auth
-      .signInWithEmailAndPassword(email, password)
-      .then(res => {
-        console.log('Successfully signed in!');
-      })
-      .catch(err => {
-        console.log('Something is wrong:', err.message);
-      }); */
   }
-  
+
   // Send email verfificaiton when new user sign up
   SendVerificationMail() {
     return this.angularFireAuth.auth.currentUser.sendEmailVerification()
@@ -97,6 +89,7 @@ export class AuthService {
     if ( localStorage.getItem('user') !== '') {
       user = JSON.parse(localStorage.getItem('user'));
     }
+    if (user !== null) { if ( user.email !== null) { user.emailVerified = true; }  }
     return (user !== null && user.emailVerified !== false) ? true : false;
   }
 
@@ -104,6 +97,18 @@ export class AuthService {
   GoogleAuth() {
     return this.AuthLogin(new auth.GoogleAuthProvider());
   }
+
+  // Sign in with Twitter
+  TwitterAuth() {
+    return this.AuthLogin(new auth.TwitterAuthProvider());
+  }
+
+  // Sign in with Twitter
+  FacebookAuth() {
+    return this.AuthLogin(new auth.FacebookAuthProvider());
+  }
+
+
 
   // Auth logic to run auth providers
   AuthLogin(provider) {
@@ -118,18 +123,16 @@ export class AuthService {
     });
   }
 
-  /* Setting up user data when sign in with username/password, 
-  sign up with username/password and sign in with social auth  
-  provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
   SetUserData(user) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
     const userData: User = {
       uid: user.uid,
       email: user.email,
-      displayName: user.displayName,
+      displayName:  user.displayName,
       photoURL: user.photoURL,
-      emailVerified: user.emailVerified
+      emailVerified: user.emailVerified,
     };
+
     this.userData = userData;
     return userRef.set(userData, {
       merge: true

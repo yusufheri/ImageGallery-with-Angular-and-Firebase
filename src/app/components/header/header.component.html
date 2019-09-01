@@ -35,8 +35,8 @@
             <ul class="nav navbar-nav navbar-right ml-auto" *ngIf="(auth.userData) && (auth.isLoggedIn)">
                 <li class="nav-item dropdown">
                     <a data-toggle="dropdown" class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false" href="#">
-                            <img [src]="auth.userData.photoURL" width="40" height="40" class="rounded-circle">
-                        <b class="caret">{{auth.userData.displayName}}</b></a>
+                            <img src="{{ !auth.userData.photoURL ? auth.defaultURL : auth.userData.photoURL }}" width="40" height="40" class="rounded-circle">
+                        <b>{{auth.userData.displayName === null ? auth.userData.email.split('@')[0] : auth.userData.displayName }}</b></a>
                     <ul class="dropdown-menu">					
                         <li><a routerLink="/image/list" class="dropdown-item">Mes photos</a></li>
                         <li><button (click)="auth.signOut()" class="dropdown-item btn btn-important">Logout</button></li>

@@ -8,7 +8,10 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService) {
+      //  const photo = (auth.userData.photoURL === undefined) ? '/assets/img/image.png' : auth.userData.photoURL;
+      //  const name = (auth.userData.displayName === undefined) ? this.auth.userData.email.split('@')[0] : auth.userData.displayName;
+  }
 
   ngOnInit() {
   }

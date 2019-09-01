@@ -19,4 +19,16 @@ export class SigninComponent implements OnInit {
   ngOnInit() {
   }
 
+  onSubmit(formValue) {
+    // (click)="authentification.SignIn(email.value, password.value)"
+    if (this.formSignin.valid) {
+      const email = formValue.value['email'];
+      const password = formValue.value['password'];
+      this.authentification.SignIn(email, password);
+      this.formSignin.reset();
+    } else {
+      console.error("Invalid")
+    }
+  }
+
 }
