@@ -19,12 +19,4 @@ export class SigninComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSigin(formValue) {
-    if (formValue.valid) {
-      this.authentification.signIn(formValue.value['email'], formValue.value['password']);
-    } else {
-      console.error('Non valide');
-    }
-  }
-
 }

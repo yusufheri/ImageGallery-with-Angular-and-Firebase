@@ -7,6 +7,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +24,9 @@ import { SignupComponent } from './components/signup/signup.component';
 
 /* Auth service */
 import { AuthService } from './services/auth.service';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { VerifyEmailAddressComponent } from './components/verify-email-address/verify-email-address.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +37,10 @@ import { AuthService } from './services/auth.service';
     NotFoundComponent,
     HeaderComponent,
     SigninComponent,
-    SignupComponent
+    SignupComponent,
+    ForgotPasswordComponent,
+    DashboardComponent,
+    VerifyEmailAddressComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +49,8 @@ import { AuthService } from './services/auth.service';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AngularFirestoreModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

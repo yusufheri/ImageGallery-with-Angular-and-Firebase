@@ -1,13 +1,11 @@
 export class User {
-    id: string;
-    createdAat: Date;
+    uid: string;
+    email: string;
+    displayName: string;
+    photoURL: string;
+    emailVerified: boolean;
 
-    constructor(
-        public email: string,
-        public password: string,
-        public avatar: string
-        ) {
-        this.id = new Date().getTime().toString();
-        this.createdAat = new Date();
+    constructor() {
+        this.uid = new Date().getTime().toString();
     }
 }

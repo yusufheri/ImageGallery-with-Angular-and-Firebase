@@ -22,7 +22,7 @@
                     <span class="input-group-addon"><i class="fa fa-search"></i></span>
                 </div>
             </form> -->
-            <ul class="nav navbar-nav navbar-right ml-auto" *ngIf="!(auth.userData|async)">			
+            <ul class="nav navbar-nav navbar-right ml-auto" *ngIf="!(auth.userData) && !(auth.isLoggedIn)">			
                 <li class="nav-item">
                     <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Login</a>
                     <ul class="dropdown-menu form-wrapper">	<li><app-signin></app-signin></li></ul>
@@ -32,12 +32,14 @@
                     <ul class="dropdown-menu form-wrapper"><li><app-signup></app-signup></li></ul>
                 </li>
             </ul>
-            <ul class="nav navbar-nav navbar-right ml-auto" *ngIf="auth.userData|async">
+            <ul class="nav navbar-nav navbar-right ml-auto" *ngIf="(auth.userData) && (auth.isLoggedIn)">
                 <li class="nav-item dropdown">
-                    <a data-toggle="dropdown" class="nav-link dropdown-toggle" href="#">Administration <b class="caret"></b></a>
+                    <a data-toggle="dropdown" class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false" href="#">
+                            <img [src]="auth.userData.photoURL" width="40" height="40" class="rounded-circle">
+                        <b class="caret">{{auth.userData.displayName}}</b></a>
                     <ul class="dropdown-menu">					
                         <li><a routerLink="/image/list" class="dropdown-item">Mes photos</a></li>
-                        <li><button (click)="signOut()" class="dropdown-item btn btn-important">Logout</button></li>
+                        <li><button (click)="auth.signOut()" class="dropdown-item btn btn-important">Logout</button></li>
                     </ul>
                 </li>
             </ul>
