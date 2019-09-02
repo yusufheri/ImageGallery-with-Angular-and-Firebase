@@ -2,14 +2,16 @@ import { FormControl, FormGroup, NgForm, FormGroupDirective } from '@angular/for
 
 export class CustomValidatorsPassword {
 
-   static passwordMatchValidator(formGroup: FormGroup) {
+    static passwordMatchValidator(formGroup: FormGroup) {
         let valid = true;
         const password = formGroup.value['password'];
         const confirm = formGroup.value['confirm'];
 
-        if (password === confirm) {
+        if ((password === confirm)) {
             valid = true;
+            console.log('Quoi');
         } else {
+            console.log(password + ':' + confirm);
             formGroup.controls['confirm'].setErrors({ NoPassswordMatch: true });
             valid = false;
         }
