@@ -1,26 +1,41 @@
-<form [formGroup]="formSignup" (submit)="onSubmit()">
+<form [formGroup]="formSignup" >
     <p class="hint-text">Fill in this form to create your account!</p>
     <div class="form-group">
-        <input type="email" class="form-control" placeholder="Username" formControlName="username">
-        <div *ngIf="isSubmitted && f.username.errors" class="invalid-feedback">
-            <div *ngIf="f.username.errors.required">Email is required</div>
-            <div *ngIf="f.username.errors.email">Email must be a valid email address</div>
-        </div>
+        <input type="email" class="form-control" placeholder="Email" formControlName="username">
+        <div class="text-danger" *ngIf="isSubmitted && f.username.errors?.required">Email is required</div>
+        <div class="text-danger" *ngIf="isSubmitted && f.username.errors?.email">Email must be a valid email address</div>
     </div>
     <div class="form-group">
         <input type="password" class="form-control" placeholder="Password" formControlName="password">
-        <div *ngIf="isSubmitted && f.password.errors" class="invalid-feedback">
-            <div *ngIf="f.password.errors.required">Password is required</div>
-            <div *ngIf="f.password.errors.pattern">Password must be at least 6 characters</div>
+        <div class="text-danger" *ngIf="isSubmitted && f.password.errors?.required">
+                <i class="material-icons">cancel</i> Password is required
         </div>
+        <label class="col text-danger" *ngIf="formSignup.controls['password'].hasError('minlength')">
+                <i class="material-icons">cancel</i>  Must be at least 8 characters!
+        </label>
+        <label class="col text-danger" *ngIf="formSignup.controls['password'].hasError('hasNumber')">
+                <i class="material-icons">cancel</i>  Must contain at least 1 number! 
+        </label>
+        <label class="col text-danger" *ngIf="formSignup.controls['password'].hasError('hasCapitalCase')">
+                <i class="material-icons">cancel</i> Must contain at least 1 in Capital Case!
+        </label>
+        <label class="col text-danger" *ngIf="formSignup.controls['password'].hasError('hasSmallCase')">
+                <i class="material-icons">cancel</i> Must contain at least 1 Letter in Small Case!
+        </label>
+        <label class="col text-danger" *ngIf="formSignup.controls['password'].hasError('hasSpecialCharacters')">
+                <i class="material-icons">cancel</i> Must contain at least 1 Special Character!
+        </label>
     </div>
     <div class="form-group">
         <input type="password" class="form-control" placeholder="Confirm Password" formControlName="confirm">
-        <div *ngIf="f.confirm.errors.required">Password is required</div>
+        <div class="text-danger" *ngIf="isSubmitted && f.confirm.errors?.required">Confirm password is required</div>        
+        <label class="col text-danger" *ngIf="formSignup.controls['confirm'].hasError('NoPassswordMatch')">
+                <i class="material-icons">cancel</i> Password do not match 
+        </label>
     </div>
     <div class="form-group">
         <label class="checkbox-inline"><input type="checkbox" formControlName="terms"> I accept the <a href="#">Terms &amp; Conditions</a></label>
-        <div *ngIf="isSubmitted && f.terms.errors" class="invalid-feedback">Accept Ts & Cs is required</div>
+        <div class="text-danger" *ngIf="isSubmitted && f.terms.errors?.required">You must accept terms and conditions</div>
     </div>
-    <input type="submit" class="btn btn-primary btn-block" value="Sign up">
+    <input type="submit" class="btn btn-primary btn-block" value="Sign up" (click)="onSubmit()">
 </form>

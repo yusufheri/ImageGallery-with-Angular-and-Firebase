@@ -38,8 +38,8 @@
                             <img src="{{ !auth.userData.photoURL ? auth.defaultURL : auth.userData.photoURL }}" width="40" height="40" class="rounded-circle">
                         <b>{{auth.userData.displayName === null ? auth.userData.email.split('@')[0] : auth.userData.displayName }}</b></a>
                     <ul class="dropdown-menu">					
-                        <li><a routerLink="/image/list" class="dropdown-item">Mes photos</a></li>
-                        <li><button (click)="auth.signOut()" class="dropdown-item btn btn-important">Logout</button></li>
+                        <li><a routerLink="/image/list" class="dropdown-item"><i class="fa fa-camera-retro" aria-hidden="true"></i> Mes photos</a></li>
+                        <li><button (click)="auth.signOut()" class="dropdown-item btn btn-important"><i class="fa fa-lock" aria-hidden="true"></i> Logout</button></li>
                     </ul>
                 </li>
             </ul>

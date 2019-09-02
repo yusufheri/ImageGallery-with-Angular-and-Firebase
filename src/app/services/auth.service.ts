@@ -45,7 +45,7 @@ export class AuthService {
       return this.angularFireAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
         /* Call the SendVerificaitonMail() function when new user sign up and returns promise */
-        this.SendVerificationMail();
+        //  this.SendVerificationMail();
         this.SetUserData(result.user);
       }).catch((error) => {
         window.alert(error.message);
